@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=utf-8>
+        <title>Blackjack</title>
+        <link href="../css/finalProject.css" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-latest.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    </head>
+    <body>
+        <section>
+            <h1>The goal of blackjack is to draw cards until you are certain that your total will be higher than the dealer's without passing 21.</h1>
+            <p>Jacks, Queens, and Kings all count as 10 points. Aces are either 11 or 1, depending on your points.</p>
+            <h1>Dealer's Cards</h1>
+            <p id="dTot"></p>
+            <p id="dealer"></p>
+            <h1>Your Cards</h1>
+            <p id="pTot"></p>
+            <p id="player"></p>
+            <p id = 'information'></p>
+            <button id = 'draw'>Yes</button>
+            <button id = 'deal'>No</button>
+            <button id = 'redo'>Restart</button>
+        </section>
+        <script src = 'js/blackjack.js'></script>
+    </body>
+</html>

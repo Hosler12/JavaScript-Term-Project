@@ -1,0 +1,154 @@
+body {
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size:1.5em;
+    background-image:url("../media/background.jpg");
+    background-size: cover;
+    background-repeat:no-repeat;
+}
+footer, header{
+    background-color: green;
+    opacity: .7;
+    width: 90%;
+}
+article{
+    display: flex;
+    flex-direction:column;
+    height:auto;
+    flex-wrap:wrap;
+    justify-content:space-between;
+}
+section{
+    flex:1;
+    background-color: green;
+    padding: 5%;
+    width: auto;
+    min-height: 30%;
+    opacity: 1;
+}
+h1{
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size: 150%;
+    color: white; 
+    text-shadow: 1px 2px black; 
+    text-align: center;
+}
+p{
+    color: white;
+    background-color: green;
+    text-align: center;
+    font-family:Georgia, "Times New Roman", Times, serif;
+    font-size: 125%;
+    text-shadow: 2px 2px black; 
+}
+nav {
+    margin:0px;
+    width:100%;
+    height:auto;
+}
+nav ul {
+    background: linear-gradient(0deg, white, green, white);
+    box-shadow: 6px 6px 6px rgba(0,0,0,0.15);
+    padding: 10px;
+    border-radius: 10px;
+    list-style: none;
+    position: relative;
+    color:white;
+    font-weight:900;
+}
+nav ul li {
+    display:inline-table;
+    margin:10px;
+    padding:5px;
+    color: white;
+}
+nav ul li:hover {
+    color:radial-gradient(white,lightblue);
+    font-size:1em;
+}
+a {
+    display: block;
+    text-align: center;
+    padding: 25px 40px;
+    color:green;
+    font-size: 1.5em;
+    text-shadow:1px 1px black;
+    text-decoration: none;
+}
+a:hover {
+    color:white;
+    background-color: green;
+    text-decoration: none;
+}
+nav ul li:hover > ul {
+    display:flex;
+    flex-direction:column;
+}
+
+nav ul ul {
+    display: none;
+    background:radial-gradient(white,lightblue);
+    border:2px solid black;
+    border-radius: 0px;
+    padding: 0px;
+    position: absolute;
+    font-size:1em;
+    z-index:10;
+}
+
+nav ul ul li {
+    display:block;
+    border-top: 1px solid black;
+    border-bottom: 1px solid black;
+    position: relative;
+    text-align:left;
+    background:radial-gradient(white,lightblue);
+}
+nav ul ul li a {
+    padding: 15px;
+    color: white;
+}    
+nav ul ul li a:hover {
+    background: green;
+    color: white;
+}
+
+/* Tabs */
+.tab-list {
+    margin: 0;
+    padding: 0;}
+  
+.tab-list li {
+    display: inline-block;
+    list-style-type: none;
+    background-color: green;
+    border-bottom: 3px solid white;
+    font-family: Georgia, "Times New Roman", Times, serif;
+    letter-spacing: 0.2em;}
+  
+.tab-list li a {
+    color: lightgray;
+    display: block;
+    padding: 3px 10px 3px 10px;}
+  
+/* Hovers */
+.tab-list li.active, .tab-list li.hover {
+    background-color: lightgray;
+    border-bottom: 3px solid white;}
+  
+.tab-list li.active a, .tab-list li a:hover {
+    color: white;
+    background-color: lightgray;}
+  
+  
+/* Panels */
+.tab-panel {
+    display: none;
+    background-color: white;
+    color: green;
+    overflow: auto;}
+  
+.tab-panel.active {
+    display: block;}
+  
+.tab-panel p {
+    margin: 20px;}
