@@ -3,19 +3,24 @@
 var myGamePiece;
 var myObstacles = [];
 var myScore;
+var movementSpeed = 4;
+if (localStorage.myHighScore == undefined) {
+    localStorage.myHighScore = 0
+}
 
 function startGame() {
     myGameArea.start();
-    myGamePiece = new component(20, 20, "purple", 10, 120);
-    myScore = new component("30px", "Consolas", "black", 280, 40, "text");
+    myGamePiece = new component(30, 30, "purple", 50, 250);
+    myScore = new component("30px", "Consolas", "black", 10, 70, "text");
+    myHighScore = new component("30px", "Consolas", "black", 10, 40, "text");
     myObstacle = new component(20, 150, "black", 300, 120); 
 }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
     start : function() {
-        this.canvas.width = 675;
-        this.canvas.height = 270;
+        this.canvas.width = 1000;
+        this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
         document.body.insertBefore(this.canvas, document.body.childNodes[0]);
         this.frameNo = 0;
@@ -92,8 +97,8 @@ function updateGameArea() {
         minHeight = 20;
         maxHeight = 200;
         height = Math.floor(Math.random()*(maxHeight-minHeight+1)+minHeight);
-        minGap = 40;
-        maxGap = 150;
+        minGap = myGamePiece.height * 1.5;
+        maxGap = myGamePiece.height * 5;
         gap = Math.floor(Math.random()*(maxGap-minGap+1)+minGap);
         myObstacles.push(new component(10, height, "green", x, 0));
         myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
@@ -102,26 +107,31 @@ function updateGameArea() {
         myObstacles[i].x += -1;
         myObstacles[i].update();
     }
-    myScore.text = "SCORE: " + myGameArea.frameNo * 10;
+    myScore.text = "SCORE: " + myGameArea.frameNo;
+    if (myGameArea.frameNo > localStorage.myHighScore){
+        localStorage.myHighScore = myGameArea.frameNo;
+    }
+    myHighScore.text = "HIGH SCORE: " + localStorage.myHighScore;
     myScore.update();
+    myHighScore.update();
     myGamePiece.newPos();
     myGamePiece.update();
 }
 
 function moveup() {
-    myGamePiece.speedY -= 1.5;
+    myGamePiece.speedY -= movementSpeed;
 }
 
 function movedown() {
-    myGamePiece.speedY += 1.5;
+    myGamePiece.speedY += movementSpeed;
 }
 
 function moveleft() {
-    myGamePiece.speedX -= 1.5;
+    myGamePiece.speedX -= movementSpeed;
 }
 
 function moveright() {
-    myGamePiece.speedX += 1.5;
+    myGamePiece.speedX += movementSpeed;
 }
 
 function stopMove() {
