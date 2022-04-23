@@ -1,24 +1,24 @@
 // Incomplete
 
-var myGamePiece;
-var myObstacles = [];
-var myScore;
-var movementSpeed = 4;
-if (localStorage.myHighScore == undefined) {
+var myGamePiece; // Player storage
+var myObstacles = []; // Obstacle storage
+var myScore; // Score Storage
+var movementSpeed = 4; // Player move speed
+if (localStorage.myHighScore == undefined) { // Create a local high score if it doesn't exist
     localStorage.myHighScore = 0
 }
 
 function startGame() {
     myGameArea.start();
-    myGamePiece = new component(30, 30, "purple", 50, 250);
-    myScore = new component("30px", "Consolas", "black", 10, 70, "text");
-    myHighScore = new component("30px", "Consolas", "black", 10, 40, "text");
-    myObstacle = new component(20, 150, "black", 300, 120); 
+    myGamePiece = new component(30, 30, "purple", 50, 250); // create the game piece as a 30 by 30 block halfway down the canvas and 50 pixels from the left edge
+    myHighScore = new component("30px", "Consolas", "black", 10, 40, "text"); // Create the high score text in the top left
+    myScore = new component("30px", "Consolas", "black", 10, 70, "text"); // Create the score text in the top left just below the high score
+    myObstacle = new component(20, 150, "black", 300, 120); // Create the obstacle compenent with 20 width and 150 height
 }
 
 var myGameArea = {
     canvas : document.createElement("canvas"),
-    start : function() {
+    start : function() { // Make a 1000 by 400 canvas and set the interval
         this.canvas.width = 1000;
         this.canvas.height = 400;
         this.context = this.canvas.getContext("2d");
@@ -39,7 +39,7 @@ function everyinterval(n) {
     return false;
 }
 
-function component(width, height, color, x, y, type) {
+function component(width, height, color, x, y, type) { // Function that handles creating components
     this.type = type;
     this.width = width;
     this.height = height;
@@ -58,11 +58,11 @@ function component(width, height, color, x, y, type) {
             ctx.fillRect(this.x, this.y, this.width, this.height);
         }
     }
-    this.newPos = function() {
+    this.newPos = function() { // Moves the position of the component
         this.x += this.speedX;
         this.y += this.speedY;
     } 
-    this.crashWith = function(otherobj) {
+    this.crashWith = function(otherobj) { // Set up collision detection
         var myleft = this.x;
         var myright = this.x + (this.width);
         var mytop = this.y;
@@ -76,7 +76,7 @@ function component(width, height, color, x, y, type) {
         (mytop > otherbottom) ||
         (myright < otherleft) ||
         (myleft > otherright)) {
-        crash = false;
+            crash = false;
         }
         return crash;
     }
@@ -84,15 +84,15 @@ function component(width, height, color, x, y, type) {
 
 function updateGameArea() {
     var x, y;
-    for (i = 0; i < myObstacles.length; i += 1) {
+    for (i = 0; i < myObstacles.length; i += 1) { // Check all objects for collision with the player
         if (myGamePiece.crashWith(myObstacles[i])) {
-        myGameArea.stop();
+            myGameArea.stop(); // If collision occurs then the game stops
         return;
         }
     }
     myGameArea.clear();
     myGameArea.frameNo += 1;
-    if (myGameArea.frameNo == 1 || everyinterval(150)) {
+    if (myGameArea.frameNo == 1 || everyinterval(150)) { // On the first frame and every 150 after create and push an obstacle
         x = myGameArea.canvas.width;
         minHeight = 20;
         maxHeight = 200;
@@ -103,12 +103,12 @@ function updateGameArea() {
         myObstacles.push(new component(10, height, "green", x, 0));
         myObstacles.push(new component(10, x - height - gap, "green", x, height + gap));
     }
-    for (i = 0; i < myObstacles.length; i += 1) {
+    for (i = 0; i < myObstacles.length; i += 1) { // Move all obstacles
         myObstacles[i].x += -1;
         myObstacles[i].update();
     }
     myScore.text = "SCORE: " + myGameArea.frameNo;
-    if (myGameArea.frameNo > localStorage.myHighScore){
+    if (myGameArea.frameNo > localStorage.myHighScore){ // If the score is higher than the highscore, the highscore is updated
         localStorage.myHighScore = myGameArea.frameNo;
     }
     myHighScore.text = "HIGH SCORE: " + localStorage.myHighScore;
